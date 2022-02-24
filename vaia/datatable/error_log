@@ -1,0 +1,150 @@
+[22-Feb-2022 11:15:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function set_charset() in /home/raselene/public_html/vaia/datatable/ssp.class.php:323
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/accepted_order.php(213): SSP::complex(Array, Array, 'order_table', 'id', Array, ' order_status='...')
+#1 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 323
+[22-Feb-2022 11:15:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function set_charset() in /home/raselene/public_html/vaia/datatable/ssp.class.php:323
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/accepted_order.php(213): SSP::complex(Array, Array, 'order_table', 'id', Array, ' order_status='...')
+#1 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 323
+[22-Feb-2022 11:16:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on array in /home/raselene/public_html/vaia/datatable/ssp.class.php:323
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/accepted_order.php(213): SSP::complex(Array, Array, 'order_table', 'id', Array, ' order_status='...')
+#1 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 323
+[22-Feb-2022 11:16:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on array in /home/raselene/public_html/vaia/datatable/ssp.class.php:323
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/accepted_order.php(213): SSP::complex(Array, Array, 'order_table', 'id', Array, ' order_status='...')
+#1 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 323
+[22-Feb-2022 11:24:53 UTC] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on array in /home/raselene/public_html/vaia/datatable/ssp.class.php:84
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#1 /home/raselene/public_html/vaia/datatable/all_order.php(214): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#2 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 84
+[22-Feb-2022 11:24:53 UTC] PHP Fatal error:  Uncaught Error: Call to a member function set_charset() on array in /home/raselene/public_html/vaia/datatable/ssp.class.php:84
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#1 /home/raselene/public_html/vaia/datatable/all_order.php(214): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#2 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 84
+[22-Feb-2022 11:26:00 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 252
+[22-Feb-2022 11:26:00 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 252
+[22-Feb-2022 11:29:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/raselene/public_html/vaia/datatable/ssp.class.php:551
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/all_order.php(208): require()
+#1 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 551
+[22-Feb-2022 11:29:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/raselene/public_html/vaia/datatable/ssp.class.php:551
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/all_order.php(208): require()
+#1 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 551
+[22-Feb-2022 11:30:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/raselene/public_html/vaia/datatable/ssp.class.php:551
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/all_order.php(208): require()
+#1 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 551
+[22-Feb-2022 11:30:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/raselene/public_html/vaia/datatable/ssp.class.php:551
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/all_order.php(208): require()
+#1 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 551
+[22-Feb-2022 11:40:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'utf8', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:40:14 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'utf8', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:40:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'utf8mb4', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:40:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'utf8mb4', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:47:11 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'utf8mb4', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:47:11 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'utf8mb4', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:48:29 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'utf8', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:48:30 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'utf8', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:53:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'charset=utf8', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:53:14 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'charset=utf8', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:53:45 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'charset=utf8mb4', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
+[22-Feb-2022 11:53:45 UTC] PHP Fatal error:  Uncaught ArgumentCountError: PDO::__construct() expects at most 4 parameters, 5 given in /home/raselene/public_html/vaia/datatable/ssp.class.php:408
+Stack trace:
+#0 /home/raselene/public_html/vaia/datatable/ssp.class.php(408): PDO->__construct('mysql:host=loca...', 'farabi', 'fipsc1994@A', 'charset=utf8mb4', Array)
+#1 /home/raselene/public_html/vaia/datatable/ssp.class.php(86): SSP::sql_connect(Array)
+#2 /home/raselene/public_html/vaia/datatable/ssp.class.php(252): SSP::db(Array)
+#3 /home/raselene/public_html/vaia/datatable/all_order.php(201): SSP::simple(Array, Array, 'order_table', 'id', Array)
+#4 {main}
+  thrown in /home/raselene/public_html/vaia/datatable/ssp.class.php on line 408
