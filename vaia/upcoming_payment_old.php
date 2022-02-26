@@ -1,137 +1,6 @@
 <?php
 
-// function find_sorting_date($pd){
 
-//     $pd_preffix = $pd[0];
-//     $pd_suffix = $pd[1];
-
-//     if($pd_preffix=='3'){
-
-//         if($pd_suffix=='3'){
-//           return false;
-//         }
-//         if($pd_suffix=='2'){
-//           return 3;
-//         }
-//         if($pd_suffix=='1'){
-//           return 2;
-//         }
-//         if($pd_suffix=='0'){
-//           return 1;
-//         }
-//     }
-
-//     if($pd_preffix=='2'){
-
-//         if($pd_suffix=='3'){
-//           return 3;
-//         }
-//         if($pd_suffix=='2'){
-//           return 3;
-//         }
-//         if($pd_suffix=='1'){
-//           return 2;
-//         }
-//         if($pd_suffix=='0'){
-//           return 1;
-//         }
-//     }
-// }
-if(isset($_COOKIE["email"]))
-{
-
-  include realpath('../db.php');
-  $upcoming_days = 50;
-  $add_day_to_today = $upcoming_days - 1;
-  // $add_day_to_today = $upcoming_days;
-  $today = date('Y-m-d');
-
-  $date=date_create($today);
-  date_add($date,date_interval_create_from_date_string("".$add_day_to_today." days"));
-  $after_date = date_format($date,"Y-m-d");
-
-
-  $sql2 = "SELECT * FROM order_table WHERE (NOT(payment_description='33') AND order_status=2) AND ((comission_date_1 BETWEEN '$today' AND '$after_date') OR (comission_date_2 BETWEEN '$today' AND '$after_date') OR (comission_date_3 BETWEEN '$today' AND '$after_date'))";
-
-  $result2 = $conn->query($sql2);
-
-  //// test start ////
-  // $y = array();
-  // while($row = $result2->fetch_assoc()) {
-
-  //         $pay_prefix = $row['payment_description'][0];
-  //         $pay_suffix = $row['payment_description'][1];
-
-  //         if($pay_prefix=='0'){
-  //             $sorting_date = $row['comission_date_1'];
-  //             $row['comission_no'] = 1;
-  //             $row['comission_paid'] = 0;
-                
-  //         }
-  //         if($pay_prefix=='1'){
-  //             $sorting_date = $row['comission_date_2'];
-  //             $row['comission_no'] = 2;
-  //             $row['comission_paid'] = 0;
-              
-  //         }
-  //         if($pay_prefix=='2'){
-  //             $sorting_date = $row['comission_date_3'];
-  //             $row['comission_no'] = 3;
-  //             $row['comission_paid'] = 0;
-              
-  //         }
-  //         if($pay_prefix=='3'){
-  //           $sorting_date = $row['comission_date_3'];
-  //           $row['comission_paid'] = 1;
-
-              
-  //         }
-
-  //         if(!is_null($row['reference_name'])){
-
-  //           if($pay_suffix=='0'){
-  //               $sorting_date = $row['comission_date_1'];
-  //               $row['pay_the_referral'] = 1;
-  //               $row['ref_comission_no'] = 1;
-                
-  //           }
-  //           if($pay_suffix=='1'){
-  //               $sorting_date = $row['comission_date_2'];
-  //               $row['pay_the_referral'] = 1;
-  //               $row['ref_comission_no'] = 2;
-                
-  //           }
-  //           if($pay_suffix=='2'){
-  //               $sorting_date = $row['comission_date_3'];
-  //               $row['pay_the_referral'] = 1;
-  //               $row['ref_comission_no'] = 3;
-                
-  //           }
-  //           if($pay_suffix=='3'){
-  //               // $sorting_date = $row['comission_date_3'];
-  //               $row['pay_the_referral'] = 0;
-                
-  //           }
-                  
-  //         }
-  //         else{
-  //           $row['pay_the_referral'] = 0;
-  //         }
-
-  //         if (array_key_exists($sorting_date,$main_array)){
-  //           array_push($main_array[$sorting_date],$row);
-            
-  //         }
-  //         else{
-  //           $main_array[$sorting_date][0] = $row;
-            
-  //         }
-
-  // }
-
-  // echo '<pre>' , var_dump($y) , '</pre>';
-  // die();
-  //// test end ////
 
   if($result2->num_rows>0){
 
@@ -268,182 +137,17 @@ function ordinal($number) {
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/user2-160x160.jpg" alt="AdminLTELogo" height="60" width="60">
-  </div>
+  <?php    
+    require(realpath('./preloader.php'));
+  ?>
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="accepted.php" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="./settings.php" class="nav-link">Change Settings</a>
-      </li>
-      <!-- <li class="nav-item d-none d-sm-inline-block">
-        <a href="./add-new-admin.php" class="nav-link">Add New Admin</a>
-      </li> -->
-    </ul>
+  <?php 
+    require(realpath('./navbar.php'));
+  ?>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
- 
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-          <i class="fas fa-user-circle"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="accepted.php" class="brand-link">
-      <h2 class="brand-text font-weight-light">Rasel Enterprise</h2>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Admin</a>
-        </div>
-      </div>
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item ">
-            <a href="./accepted.php" class="nav-link">
-              <i class="nav-icon fas fa-plus-circle"></i>
-              <p>
-                Accepted Orders
-                <!-- <i class="right fas fa-angle-left"></i> -->
-              </p>
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-            <a href="./confirmed.php" class="nav-link">
-              <i class="nav-icon fas fa-check-circle"></i>
-              <p>
-                Confirmed Orders
-                
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./completed.php" class="nav-link">
-              <i class="nav-icon fas fa-trophy"></i>
-              <p>
-                Completed Orders
-                <!-- <span class="right badge badge-danger">New</span> -->
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./cancelled.php" class="nav-link">
-              <i class="nav-icon fas fa-ban"></i>
-              <p>
-                Cancelled Orders
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./paid.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Paid Orders
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./all.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-bag"></i>
-              <p>
-                All Orders
-               
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./upcoming_payment.php" class="nav-link active">
-              <i class="nav-icon fas fa-money-check-alt"></i>
-              <p>
-                Upcoming Payment
-                
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./settings.php" class="nav-link">
-              <i class="nav-icon fas fa-cog"></i>
-              <p>
-                Change Settings
-                
-              </p>
-            </a>
-          </li>
-
-          <!-- <li class="nav-item">
-            <a href="./add-new-admin.php" class="nav-link">
-              <i class="nav-icon fas fa-user-plus"></i>
-              <p>
-                Add New Admin
-                
-              </p>
-            </a>
-          </li> -->
-
-          <li class="nav-header">   </li>
-          <li class="nav-header">   </li>
-          <li class="nav-header">   </li>
-
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
+  <?php 
+    require(realpath('./left_sidebar.php'));
+  ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper overflow-auto" >
     <!-- Content Header (Page header) -->
@@ -662,47 +366,12 @@ function ordinal($number) {
         <!-- /.modal-dialog -->
   </div>
 
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2022 <a href="https://adminlte.io">Rasel Enterprise</a>.</strong>
-    All rights reserved.
-    
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-            <div class="card card-widget widget-user-2">
-              <div class="widget-user-header control-sidebar-dark">
-                <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="./dist/img/user2-160x160.jpg" alt="User Avatar">
-                </div>
-                <!-- /.widget-user-image -->
-                <h3 class="widget-user-username">Delowar Hossain Rasel</h3>
-                <h5 class="widget-user-desc">Admin</h5>
-              </div>
-              <div class="card-footer p-0 control-sidebar-dark">
-                <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      Change Name 
-                    </a>
-                  </li>
-                  
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      Change Password 
-                    </a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="./logout.php" class="nav-link">
-                      Logout 
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-  </aside>
-  <!-- /.control-sidebar -->
+  <?php    
+    require(realpath('./footer.php'));
+  ?>
+  <?php    
+    require(realpath('./right_sidebar.php'));
+  ?>
 </div>
 <!-- ./wrapper -->
 
@@ -754,6 +423,9 @@ function ordinal($number) {
 
 <script type="text/javascript" charset="utf8" src="plugins/progress-bar-number/progressnumber.js"></script>
 
+<?php 
+    require(realpath('./common_script.php'));
+?>
 
 <script type="text/javascript">
   $(".paycomission").on("click",function(){
@@ -854,6 +526,7 @@ function ordinal($number) {
 
   });
 </script>
+
 
 
 

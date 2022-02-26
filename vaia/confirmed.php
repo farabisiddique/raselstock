@@ -96,200 +96,17 @@ if(isset($_COOKIE["email"]))
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/user2-160x160.jpg" alt="AdminLTELogo" height="60" width="60">
-  </div>
+  <?php    
+    require(realpath('./preloader.php'));
+  ?>
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="accepted.php" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="./settings.php" class="nav-link">Change Settings</a>
-      </li>
-      <!-- <li class="nav-item d-none d-sm-inline-block">
-        <a href="./add-new-admin.php" class="nav-link">Add New Admin</a>
-      </li> -->
-    </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
- 
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-          <i class="fas fa-user-circle"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="accepted.php" class="brand-link">
-      <h2 class="brand-text font-weight-light">Rasel Enterprise</h2>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Admin</a>
-        </div>
-      </div>
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-     <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item ">
-            <a href="./accepted.php" class="nav-link">
-              <i class="nav-icon fas fa-plus-circle"></i>
-              <p>
-                Accepted Orders
-                <!-- <i class="right fas fa-angle-left"></i> -->
-              </p>
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-            <a href="./confirmed.php" class="nav-link active">
-              <i class="nav-icon fas fa-check-circle"></i>
-              <p>
-                Confirmed Orders
-                
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./completed.php" class="nav-link">
-              <i class="nav-icon fas fa-trophy"></i>
-              <p>
-                Completed Orders
-                <!-- <span class="right badge badge-danger">New</span> -->
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./cancelled.php" class="nav-link">
-              <i class="nav-icon fas fa-ban"></i>
-              <p>
-                Cancelled Orders
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./paid.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Paid Orders
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./unpaid.php" class="nav-link">
-              <i class="nav-icon fas fa-not-equal"></i>
-              <!-- <i class="fab fa-creative-commons-nc"></i> -->
-              <p>
-                Unpaid Orders
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./all.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-bag"></i>
-              <p>
-                All Orders
-               
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./upcoming_payment.php" class="nav-link">
-              <i class="nav-icon fas fa-money-check-alt"></i>
-              <p>
-                Upcoming Payment
-                
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="./business_details.php" class="nav-link">
-              <!-- <i class="nav-icon fas fa-money-bill-wave"></i> -->
-              <i class="nav-icon fas fa-business-time"></i>
-              <p>
-                Business Details
-              </p>
-            </a>
-          </li>          <li class="nav-item">
-            <a href="./settings.php" class="nav-link">
-              <i class="nav-icon fas fa-cog"></i>
-              <p>
-                Change Settings
-                
-              </p>
-            </a>
-          </li>
-
-          <!-- <li class="nav-item">
-            <a href="./add-new-admin.php" class="nav-link">
-              <i class="nav-icon fas fa-user-plus"></i>
-              <p>
-                Add New Admin
-                
-              </p>
-            </a>
-          </li> -->
-
-          <li class="nav-header">   </li>
-          <li class="nav-header">   </li>
-          <li class="nav-header">   </li>
-
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
+  <?php 
+    require(realpath('./navbar.php'));
+  ?>
+  <?php 
+    require(realpath('./left_sidebar.php'));
+  ?>
+  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper overflow-auto" >
     <!-- Content Header (Page header) -->
@@ -464,7 +281,7 @@ if(isset($_COOKIE["email"]))
                         <th>Order Date</th>
                         <th>Product Name</th>
                         <th>Stock</th>
-                        <th>Amount</th>
+                        <th>Packet Number</th>
                         <th>Total</th>
                         <th>1st Comission Date</th>
                         <th>2nd Comission Date</th>
@@ -512,54 +329,12 @@ if(isset($_COOKIE["email"]))
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2022 <a href="https://adminlte.io">Rasel Enterprise</a>.</strong>
-    All rights reserved.
-    
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <!-- <div class="container-fluid"> -->
-            <!-- Widget: user widget style 2 -->
-            <div class="card card-widget widget-user-2">
-              <!-- Add the bg color to the header using any of the bg-* classes -->
-              <div class="widget-user-header control-sidebar-dark">
-                <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="./dist/img/user2-160x160.jpg" alt="User Avatar">
-                </div>
-                <!-- /.widget-user-image -->
-                <h3 class="widget-user-username">Delowar Hossain Rasel</h3>
-                <h5 class="widget-user-desc">Admin</h5>
-              </div>
-              <div class="card-footer p-0 control-sidebar-dark">
-                <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      Change Name 
-                    </a>
-                  </li>
-                  
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      Change Password 
-                    </a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="./logout.php" class="nav-link">
-                      Logout 
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- /.widget-user -->
-    <!-- </div> -->
-  </aside>
-  <!-- /.control-sidebar -->
+  <?php    
+    require(realpath('./footer.php'));
+?>
+<?php    
+    require(realpath('./right_sidebar.php'));
+?>
 </div>
 <!-- ./wrapper -->
 
@@ -633,7 +408,9 @@ if(isset($_COOKIE["email"]))
 
 <script type="text/javascript" charset="utf8" src="delete_modal_event.js"></script>
 
-
+<?php 
+    require(realpath('./common_script.php'));
+?>
 
 
 
