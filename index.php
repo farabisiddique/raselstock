@@ -290,7 +290,7 @@
 
       <label id="textdesign">স্টক হোল্ডারের বিকাশ (পার্সোনাল)  নম্বর:</label>
 
-      <input type="number" id="field" placeholder="বিকাশ (পার্সোনাল) নম্বর দিন" required="1" name="customer_bkash_no">
+      <input type="number" id="field" placeholder="বিকাশ (পার্সোনাল) নম্বর দিন" name="customer_bkash_no">
       
 
       <h3 class="mt-4">ঠিকানা</h3>

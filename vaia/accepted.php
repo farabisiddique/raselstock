@@ -111,80 +111,15 @@ if(isset($_COOKIE["email"]))
 
   <link rel="stylesheet" type="text/css" href="plugins/progress-bar-number/progressnumber.css">
 
-  <style type="text/css">
-    
-    @import url(//db.onlinewebfonts.com/c/3a6b4db2e9473789e2b09df0875560bb?family=SF+Sports+Night+NS);
-
-html,body {
-  
-  font-family:'Lato', sans-serif;
-}
-.loader {
-  width: 100px;
-  height: 80px;
-  position: absolute;
-  top: 0; right: 0; left: 0; bottom: 0;
-  margin: auto;
-}
-.loader .image {
-  width: 100px;
-  height: 160px;
-  font-size: 40px;
-  text-align: center;
-  transform-origin: bottom center;
-  animation: 3s rotate infinite;
-  opacity: 0;
-}
-.loader span {
-  display: block;
-  width: 100%;
-  text-align: center;
-  position: absolute;
-  bottom: 0;
-}
-
-@keyframes rotate{
-  0% {
-    transform: rotate(90deg);
-  }
-  10% {
-    opacity: 0;
-  }
-  35% {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
-  65% {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
-  80% {
-    opacity: 0;
-  }
-  100% {
-    transform: rotate(-90deg);
-  }
-}
-
-
-  </style>
-
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
-  <!-- <div class="preloader flex-column justify-content-center align-items-center">
+  <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="dist/img/user2-160x160.jpg" alt="AdminLTELogo" height="60" width="60">
-  </div> -->
-
-  <div class="preloader loader">
-  <div class="image">
-    <i class="fa fa-codepen"></i>
   </div>
-  <span></span>
-</div>
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -750,59 +685,7 @@ html,body {
 <script type="text/javascript" charset="utf8" src="delete_modal_event.js"></script>
 
 
-<script type="text/javascript">
-  
-  $(document).ready(function() {
-  var counter = 0;
 
-  // Start the changing images
-  setInterval(function() {
-    if(counter == 9) { 
-      counter = 0; 
-    }
-
-    changeImage(counter);
-    counter++;
-  }, 3000);
-
-  // Set the percentage off
-  loading();
-});
-
-function changeImage(counter) {
-  var images = [
-    '<i class="fa fa-fighter-jet"></i>',
-    '<i class="fa fa-gamepad"></i>',
-    '<i class="fa fa-headphones"></i>',
-    '<i class="fa fa-cubes"></i>',
-    '<i class="fa fa-paw"></i>',
-    '<i class="fa fa-rocket"></i>',
-    '<i class="fa fa-ticket"></i>',
-    '<i class="fa fa-pie-chart"></i>',
-    '<i class="fa fa-codepen"></i>'
-  ];
-
-  $(".loader .image").html(""+ images[counter] +"");
-}
-
-function loading(){
-  var num = 0;
-
-  for(i=0; i<=100; i++) {
-    setTimeout(function() { 
-      $('.loader span').html(num+'%');
-
-      if(num == 100) {
-        loading();
-      }
-      num++;
-    },i*120);
-  };
-
-}
-
-
-</script>
 
 
 </body>
