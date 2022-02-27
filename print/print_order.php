@@ -323,7 +323,7 @@
 
       <div class="holder_info">
         <div class="holder_info_part">
-          <h3>কোডঃ<span>&nbsp;<?php  echo $invoice_no; ?></span></h3>
+          <h3>কোডঃ<span style="color: red;">&nbsp;<?php  echo $invoice_no; ?></span></h3>
           <h3>স্টক এজেন্ট হোল্ডার :
           <span class="b_holder">
             <?php  echo $stock_holder_name; ?>
@@ -509,7 +509,7 @@
 
       <div class="holder_info">
         <div class="holder_info_part">
-          <h3>কোডঃ <span>&nbsp;<?php  echo $invoice_no; ?></span></h3>
+          <h3>কোডঃ <span style="color: red;">&nbsp;<?php  echo $invoice_no; ?></span></h3>
           <h3>প্রতিনিধির নামঃ 
             <span class="b_holder">
               <?php  echo $ref_name; ?>
