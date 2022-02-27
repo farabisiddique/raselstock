@@ -35,28 +35,20 @@ if(isset($_COOKIE["email"]))
 
   $all_dates_array = array();
   
-  $sql2 = "SELECT * FROM order_table WHERE NOT(payment_description='33') AND order_status=2";
+  $sql2 = "SELECT * FROM order_table WHERE payment_description='33' AND order_status=2 AND capital_payment_description=0";
+
+
 
   $result2 = $conn->query($sql2);
-
 
   if($result2->num_rows>0){
 
       $no_upcoming_payment = 0;
       $main_array = array();
-      $ref_array = array();
   
       while($row = $result2->fetch_assoc()) {
  
-          $pay_prefix = $row['payment_description'][0];
-          $pay_prefix = (int) $pay_prefix; 
-
-          if($pay_prefix==3){
-
-          }
-          else{
-            $row['comission_no'] = $pay_prefix+1;
-            $date_row_string = "comission_date_".$row['comission_no'];
+            $date_row_string = "comission_date_3";
             $sort_date = $row[$date_row_string];
 
             if (array_key_exists($sort_date,$main_array)){
@@ -67,62 +59,29 @@ if(isset($_COOKIE["email"]))
               $main_array[$sort_date][0] = $row;
               
             }
-
-          }
-
-          if(!is_null($row['reference_name'])){
-
-            $pay_suffix = $row['payment_description'][1];
-            $pay_suffix = (int) $pay_suffix;
-
-            if($pay_suffix==3){
-
-            }
-            else{
-
-                $row['ref_comission_no'] = $pay_suffix+1;
-                $date_row_string_ref = "comission_date_".$row['ref_comission_no'];
-                $sort_date_ref = $row[$date_row_string_ref];
-
-                if (array_key_exists($sort_date_ref,$ref_array)){
-                  array_push($ref_array[$sort_date_ref],$row);
-                  
-                }
-                else{
-                  $ref_array[$sort_date_ref][0] = $row;
-                  
-                }
-
-            }
-
-          }
               
           
       }
 
-        $all_stock_com_dates = array_keys($main_array);
-        $all_ref_com_dates = array_keys($ref_array);
-        $merged_array = array_merge($all_stock_com_dates,$all_ref_com_dates);
-        $unique_array = array_unique($merged_array);
+      $all_stock_com_dates = array_keys($main_array);
 
-        $period_array = array();
-        foreach ($period as $key => $value) {
-          array_push($period_array,$value->format('Y-m-d'));
-        }
-        $period = array_intersect($period_array, $unique_array);
-        usort($period, "date_sort");
-        $upcoming_payment = count($period);
+      $unique_array = array_unique($all_stock_com_dates);
+
+      $period_array = array();
+      foreach ($period as $key => $value) {
+        array_push($period_array,$value->format('Y-m-d'));
+      }
+
+      $period = array_intersect($period_array, $unique_array);
+      usort($period, "date_sort");
+
+      $upcoming_payment = count($period);
   
 
-  
   }
   else{
       $no_upcoming_payment = 1;
   }
-
-
-
-
 
 
 
@@ -190,13 +149,13 @@ if(isset($_COOKIE["email"]))
                 <div class="container-fluid">
                   <div class="row mb-2">
                     <div class="col-sm-6">
-                      <h1 class="m-0">Upcoming Payment for Next <?php echo $upcoming_days;?> Days</h1>
+                      <h1 class="m-0">Upcoming Capital Payment for Next <?php echo $upcoming_days;?> Days</h1>
 
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Upcoming Payment</li>
+                        <li class="breadcrumb-item active">Capital Payment</li>
                       </ol>
                     </div><!-- /.col -->
                   </div><!-- /.row -->
@@ -206,7 +165,7 @@ if(isset($_COOKIE["email"]))
 
                     <?php 
 
-                      if($no_upcoming_payment!=1){
+                      if($upcoming_payment>0){
 
 
                       $i = 0;
@@ -227,7 +186,7 @@ if(isset($_COOKIE["email"]))
                                 ?>
                                 <div class="col-md-4">
                                   <div class="card card-widget widget-user-2">
-                                    <div class="widget-user-header bg-success">
+                                    <div class="widget-user-header " style="background: linear-gradient(to right, rgb(173, 83, 137), rgb(60, 16, 83)); color: white;">
                                       <h5>Customer Information</h5>
                                     </div>
                                     <div class="card-footer p-0">
@@ -250,7 +209,7 @@ if(isset($_COOKIE["email"]))
 
                                         <li class="nav-item mb-3">
                                           
-                                          <button type="button" class="btn btn-outline-primary btn-block paycomission" data-toggle="modal" data-target="#modal-warning" data-name="<?php echo $bvalue['customer_name'];?>" data-id="<?php echo $bvalue['id'];?>" data-pd="<?php echo $bvalue['comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($bvalue['comission_no']);?> Stock Comission (<?php echo $bvalue['comission_amount'];?> Taka)</button>
+                                          <button type="button" class="btn btn-outline-primary btn-block paycapital" data-toggle="modal" data-target="#modal-warning" data-name="<?php echo $bvalue['customer_name'];?>" data-id="<?php echo $bvalue['id'];?>" data-pd=""><i class="fas fa-money-bill-alt"></i> Pay the  Capital Payment (<?php echo $bvalue['total'];?> Taka)</button>
 
                                         
 
@@ -263,49 +222,11 @@ if(isset($_COOKIE["email"]))
                                   
                                 </div>
 
-                                <?php  } 
-                                foreach ($ref_array[$a_date] as $key => $cvalue) { 
+                                <?php  
+                                    } 
+                                 
                                   ?>
-                                <div class="col-md-4">
-                                  <div class="card card-widget widget-user-2">   
-                                    <div class="widget-user-header bg-dark">
-                                      <h5>Reference Information</h5> 
-                                    </div>
-                                    <div class="card-footer p-0">
-                                      <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                          <a href="#" class="nav-link">
-                                            Referred Customer Name: <span class="float-right badge bg-info"><?php echo $cvalue['customer_name'];?></span>
-                                          </a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a href="#" class="nav-link">
-                                            Name: <span class="float-right badge bg-info"><?php echo $cvalue['reference_name'];?></span>
-                                          </a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a href="" class="nav-link">
-                                            Contact No: <span class="float-right badge bg-primary"><?php echo $cvalue['reference_phone'];?></span>
-                                          </a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a href="#" class="nav-link">
-                                            Reference Comission Amount: <span class="float-right badge bg-primary"><?php echo floor(($cvalue['total']*$cvalue['referral_percentage'])/100); ?> Taka</span>
-                                          </a>
-                                        </li>
-                                        
-                                         <li class="nav-item mb-3">
-                                          <button type="button" class="btn btn-outline-primary btn-block payreferral" data-toggle="modal" data-target="#modal-secondary" data-name="<?php echo $cvalue['reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['ref_comission_no']);?> Reference Comission (<?php echo floor(($cvalue['total']*$cvalue['referral_percentage'])/100); ?> Taka)</button>
-                                        </li>
-                                      
-                                      </ul>
-                                    </div>
-
-                                      
-                                  </div>
-                                  
-                                </div>
-                                <?php  } ?>
+                                
                                     
                       </div>
                     <?php  
@@ -319,7 +240,7 @@ if(isset($_COOKIE["email"]))
                     ?>
 
                     <div class="row">
-                      <h2 class="text-center">There is no upcoming payments</h2>
+                      <h2 class="text-center">There is no upcoming capital payments</h2>
                     </div>
 
 
@@ -341,9 +262,9 @@ if(isset($_COOKIE["email"]))
 
   <div class="modal fade" id="modal-warning" style="display: none;" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content bg-warning">
+          <div class="modal-content" style="background: linear-gradient(to right, rgb(253, 200, 48), rgb(243, 115, 53));">
             <div class="modal-header">
-              <h4 class="modal-title">Stock Comission Payment Confirmation</h4>
+              <h4 class="modal-title">Capital Payment Confirmation</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
@@ -370,7 +291,7 @@ if(isset($_COOKIE["email"]))
               </button>
             </div>
             <div class="modal-body">
-              <p>Have you just paid <span id="reference_name_modal"></span>?</p>
+              <p>Have you just paid  <span id="reference_name_modal"></span>?</p>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-outline-dark" data-dismiss="modal">No</button>
@@ -445,33 +366,25 @@ if(isset($_COOKIE["email"]))
 ?>
 
 <script type="text/javascript">
-  $(".paycomission").on("click",function(){
+  $(".paycapital").on("click",function(){
 
       var name = $(this).data("name");
       var id = $(this).data("id");
-      var pd = $(this).data("pd");
 
       $("#customer_name_modal").html(name);
       $('#yespayment').attr('data-orderid', id);
-      $('#yespayment').attr('data-pd', pd);
-
-
-
 
   });
 
   $("#yespayment").click(function(){
 
             var id = $(this).data("orderid");
-            var pd = $(this).data("pd");
-            var type = 0;
-            
-            
+                
             $.ajax({
                     method: "POST",
-                    url: "pay.php",
+                    url: "pay_capital.php",
                     async:false,
-                    data: {id: id,pd: pd,type:type},
+                    data: {id: id},
                     success: function(msg) {
         
                     if(msg==0){
