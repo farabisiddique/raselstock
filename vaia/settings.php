@@ -16,6 +16,7 @@ if(isset($_COOKIE["email"]))
       $comission_day_interval_show = $row['comission_interval'];
       $comission_percentage = $row['comission_percentage'];
       $reference_percentage = $row['reference_percentage'];
+      $second_reference_percentage = $row['second_reference_percentage'];
       $how_many_comission_date = $row['comission_date_number'];
       $default_payment_method = $row['default_payment_method'];
       $main_product = $row['main_product'];
@@ -132,6 +133,11 @@ if(isset($_COOKIE["email"]))
                                 <div class="form-group">
                                   <label for="refPercentage">Reference Comission Percentage (%) </label>
                                   <input type="number" class="form-control" id="refPercentage" name="reference_percentage" value="<?php echo $reference_percentage;?>" >
+                                </div>
+
+                                <div class="form-group">
+                                  <label for="refPercentage">2nd Reference Comission Percentage (%) </label>
+                                  <input type="number" class="form-control" id="secondrefPercentage" name="second_reference_percentage" value="<?php echo $second_reference_percentage;?>" >
                                 </div>
 
                                 <div class="form-group">

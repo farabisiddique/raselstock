@@ -36,7 +36,7 @@
 
             $r_name = $row['customer_name'];
             $r_phone = $row['customer_phone'];  
-            $r_bkash_no = $row['customer_bkash_no'];
+            $r_code = $row['my_referral_code'];
           }
           return array($r_name,$r_phone);
       }
@@ -77,6 +77,7 @@
       $comission_day_interval_show = $row['comission_interval'];
       $comission_percentage = $row['comission_percentage'];
       $reference_percentage = $row['reference_percentage'];
+      $second_reference_percentage = $row['second_reference_percentage'];
       $how_many_comission_date = $row['comission_date_number'];
       $default_payment_method = $row['default_payment_method'];
       $main_product = $row['main_product'];
@@ -130,12 +131,21 @@
               $reference_array = reference_finder($refcode,$conn);
               $customer_name = $_POST['customer_name'];
               $customer_phone = $_POST['customer_phone'];
-              $customer_bkash_no = $_POST['customer_bkash_no'];
+              
+
+              if(isset($_POST['customer_bkash_no'])){
+                $customer_bkash_no = 0;
+              }
+              else{
+                $customer_bkash_no = $_POST['customer_bkash_no'];
+              }
+
               $customer_address = $_POST['home_or_village'].",".$_POST['municipality'].",".$_POST['upazilla'].", ফেনী।";
               $order_date = date_formatter($order_day);
               $my_referral_code = refmake($conn);
               $reference_name = $reference_array[0];
               $reference_phone = $reference_array[1];
+              $references_code = $refcode;
               $stock_amount = $_POST['stock_amount'];
               $product_name = $main_product;
               $brand_name = $main_product_brand;
@@ -153,8 +163,8 @@
               $invoice_number = $my_referral_code;
 
 
-              $sql = "INSERT INTO order_table (customer_name, customer_phone,customer_bkash_no, customer_address,order_date,my_referral_code,reference_name, reference_phone, stock_amount, product_name, brand_name,product_amount,product_ideal_amount,product_unit_price, total, comission_date_1, comission_date_2, comission_date_3,comission_percentage ,referral_percentage,comission_amount, payment_method,payment_description ,delivery_date, order_status, invoice_number )
-              VALUES ('$customer_name', '$customer_phone','$customer_bkash_no','$customer_address','$order_date','$my_referral_code','$reference_name','$reference_phone','$stock_amount','$product_name','$main_product_brand','$product_amount','$product_ideal_amount','$unit_price','$total','$comission_date_1','$comission_date_2','$comission_date_3','$comission_percentage' ,'$reference_percentage','$comission_amount','$payment_method_for_order','00','$delivery_date','0','$invoice_number' )";
+              $sql = "INSERT INTO order_table (customer_name, customer_phone,customer_bkash_no, customer_address,order_date,my_referral_code,reference_name, reference_phone, references_code,stock_amount, product_name, brand_name,product_amount,product_ideal_amount,product_unit_price, total, comission_date_1, comission_date_2, comission_date_3,comission_percentage ,referral_percentage, second_referral_percentage, comission_amount, payment_method,payment_description ,delivery_date, order_status, invoice_number )
+              VALUES ('$customer_name', '$customer_phone','$customer_bkash_no','$customer_address','$order_date','$my_referral_code','$reference_name','$reference_phone','$references_code','$stock_amount','$product_name','$main_product_brand','$product_amount','$product_ideal_amount','$unit_price','$total','$comission_date_1','$comission_date_2','$comission_date_3','$comission_percentage' ,'$reference_percentage','$second_reference_percentage','$comission_amount','$payment_method_for_order','00','$delivery_date','0','$invoice_number' )";
 
                 // die(var_dump($sql));
 
@@ -171,7 +181,14 @@
                 
               $customer_name = $_POST['customer_name'];
               $customer_phone = $_POST['customer_phone']; 
-              $customer_bkash_no = $_POST['customer_bkash_no'];
+
+              if(isset($_POST['customer_bkash_no'])){
+                $customer_bkash_no = 0;
+              }
+              else{
+                $customer_bkash_no = $_POST['customer_bkash_no'];
+              }
+
               $customer_address = $_POST['home_or_village'].",".$_POST['municipality'].",".$_POST['upazilla'].", ফেনী।";
               $order_date = date_formatter($order_day);
               $my_referral_code = refmake($conn);
@@ -191,8 +208,8 @@
               $delivery_date = date_formatter($delivery_date_array[0]);
               $invoice_number = $my_referral_code;
 
-              $sql = "INSERT INTO order_table (customer_name, customer_phone,customer_bkash_no ,customer_address,order_date, my_referral_code, stock_amount, product_name,brand_name, product_amount,product_ideal_amount,product_unit_price,total, comission_date_1, comission_date_2, comission_date_3, comission_percentage ,referral_percentage, comission_amount, payment_method,payment_description, delivery_date, order_status, invoice_number )
-              VALUES ('$customer_name', '$customer_phone','$customer_bkash_no' ,'$customer_address','$order_date','$my_referral_code','$stock_amount','$product_name','$main_product_brand','$product_amount','$product_ideal_amount','$product_unit_price','$total','$comission_date_1','$comission_date_2','$comission_date_3','$comission_percentage' ,'$reference_percentage','$comission_amount','$payment_method_for_order','00','$delivery_date','0','$invoice_number' )";
+              $sql = "INSERT INTO order_table (customer_name, customer_phone,customer_bkash_no ,customer_address,order_date, my_referral_code, stock_amount, product_name,brand_name, product_amount,product_ideal_amount,product_unit_price,total, comission_date_1, comission_date_2, comission_date_3, comission_percentage ,referral_percentage,second_referral_percentage, comission_amount, payment_method,payment_description, delivery_date, order_status, invoice_number )
+              VALUES ('$customer_name', '$customer_phone','$customer_bkash_no' ,'$customer_address','$order_date','$my_referral_code','$stock_amount','$product_name','$main_product_brand','$product_amount','$product_ideal_amount','$product_unit_price','$total','$comission_date_1','$comission_date_2','$comission_date_3','$comission_percentage' ,'$reference_percentage','$second_reference_percentage','$comission_amount','$payment_method_for_order','00','$delivery_date','0','$invoice_number' )";
 
                 
               if ($conn->query($sql) === TRUE) {
@@ -381,6 +398,7 @@
       <th scope="col">স্টক কমিশন, প্রতি <?php echo $comission_day_interval_show; ?> দিনে <?php echo $comission_percentage; ?>%</th>
 
       <th scope="col">প্রতিনিধি(রেফারেন্স)  কমিশন, প্রতি  <?php echo $comission_day_interval_show; ?> দিনে <?php echo $reference_percentage; ?>%</th>
+      <th scope="col">২য়প্রতিনিধি(রেফারেন্স)  কমিশন, প্রতি  <?php echo $comission_day_interval_show; ?> দিনে <?php echo $second_reference_percentage; ?>%</th>
       <th scope="col">পেমেন্ট পদ্ধতি</th>
       
     </tr>
@@ -402,6 +420,8 @@
         echo "<td class='comission_amount'>0</td>";
 
         echo "<td class='reference_amount'>0</td>";
+
+        echo "<td class='second_reference_amount'>0</td>";
 
         echo "<td>".$payment_method."</td>";
 
@@ -454,15 +474,18 @@
           var unit_price = '<?php echo $unit_price; ?>';
           var percent = '<?php echo $comission_percentage; ?>';
           var reference_percent = '<?php echo $reference_percentage; ?>';
+          var second_reference_percent = '<?php echo $second_reference_percentage; ?>';
           var product_amount = stock_amount*parseInt(packet_per_stock);
           var total_amount = product_amount*parseInt(unit_price);
           var comission_amount = (total_amount*parseInt(percent))/100;
           var reference_amount = (total_amount*parseInt(reference_percent))/100;
+          var second_reference_amount = (total_amount*parseInt(second_reference_percent))/100;
 
           $(".product_amount").html(product_amount);
           $(".total").html(total_amount);
           $(".comission_amount").html(comission_amount);
           $(".reference_amount").html(reference_amount);
+          $(".second_reference_amount").html(second_reference_amount);
 
         $(".stock_amount").keyup(function(){ 
 
@@ -471,15 +494,18 @@
           var unit_price = '<?php echo $unit_price; ?>';
           var percent = '<?php echo $comission_percentage; ?>';
           var reference_percent = '<?php echo $reference_percentage; ?>';
+          var second_reference_percent = '<?php echo $second_reference_percentage; ?>';
           var product_amount = stock_amount*parseInt(packet_per_stock);
           var total_amount = product_amount*parseInt(unit_price);
           var comission_amount = (total_amount*parseInt(percent))/100;
           var reference_amount = (total_amount*parseInt(reference_percent))/100;
+          var second_reference_amount = (total_amount*parseInt(second_reference_percent))/100;
 
           $(".product_amount").html(product_amount);
           $(".total").html(total_amount);
           $(".comission_amount").html(comission_amount);
           $(".reference_amount").html(reference_amount);
+          $(".second_reference_amount").html(second_reference_amount);
         });
 
 
