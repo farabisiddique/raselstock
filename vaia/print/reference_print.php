@@ -1,4 +1,5 @@
-<div class="ref_main raselbg" style="margin-top: 2%;">
+<div class="pagebreak"></div>
+<div class="ref_main ref_raselbg" style="margin-top: 2%;">
     <div class="middle">
         <div class="ref_topname">
             <h1 class="narrow_height" style="color: blue;"> মেসার্স রাসেল এন্টারপ্রাইজ </h1>
@@ -38,7 +39,7 @@
                         <?php  echo $stock_amount; ?>
                       </span>
                     </h3>
-                    <h3>এরিয়া : 
+                    <h3 style="line-height: 1.4;">এরিয়া : 
                       <span class="b_holder">
                         <?php  echo $stock_holder_address; ?>
                       </span>
@@ -57,7 +58,7 @@
               </div>
             </div>
         </div>
-        <div class="first_table">
+        <div class="ref_first_table">
           <table>
             <thead>
               <tr>
@@ -88,7 +89,7 @@
             </tbody>
           </table>  
         </div>
-        <div class="second_table">
+        <div class="ref_second_table">
           <table class="maintable">
             <thead>
               <tr>

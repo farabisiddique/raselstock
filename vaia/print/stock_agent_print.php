@@ -22,21 +22,36 @@
                 background-image: url('raselbg.png');
                 background-position-x: center;
                 background-repeat: no-repeat;
+                background-position-y: 75%;
+                background-size: 900px 239px;
+                print-color-adjust: exact;
+                color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                z-index: 99;
+            }
+
+            .ref_raselbg{
+                background-image: url('raselbg.png');
+                background-position-x: center;
+                background-repeat: no-repeat;
                 background-position-y: 95%;
                 background-size: 900px 239px;
                 print-color-adjust: exact;
                 color-adjust: exact;
                 -webkit-print-color-adjust: exact;
                 z-index: 99;
-              }
+            }
+
             .main{
               width: 100%;
-              height: 1000px;
+              height: 800px;
+              /*background-color: pink;*/
                         
             }
             .ref_main{
               width: 100%;
               height: 500px;
+              /*background-color: darkmagenta;*/
 
             }
             .middle{
@@ -51,6 +66,7 @@
               text-align: center;
               margin-bottom: 1%;
               padding-top: 0.1%;
+              /*background-color: yellow;*/
               
               
             }
@@ -97,7 +113,7 @@
             .holder_info{
               width: 100%;
               height: 18%;
-              /*line-height: 0.7;*/
+              /*background-color: yellowgreen;*/
               
             }
 
@@ -122,6 +138,7 @@
               width: 100%;
               height: 24%;
               line-height: 0.7;
+              /*background-color: red;*/
               
             }
 
@@ -129,12 +146,14 @@
               width: 50%;
               height: 100%;
               float: left;
+              /*background-color: pink;*/
             }
             .ref_holder_info_part1{
               width: 48%;
               height: 100%;
               float: left;
               text-align: right;
+              /*background-color: magenta;*/
             }
             .ref_holder_info_part2{
               width: 50%;
@@ -149,15 +168,30 @@
               width: 100%;
               height: 15%;
               text-align: center;
+              /*background-color: dimgrey;*/
 
+            }
+
+            .ref_first_table{
+              width: 100%;
+              height: 15%;
+              text-align: center;
 
             }
             .second_table{
               width: 100%;
               height: 18%;
               text-align: center;
-              background-color: magenta;
+              
             }
+            .ref_second_table{
+              width: 100%;
+              height: 25%;
+              text-align: center;
+              /*background-color: magenta;*/
+              
+            }
+
             table,th,tr,td{
               border: 2px solid blue;
               border-collapse: collapse;
@@ -167,6 +201,11 @@
             table{
               width: 100%;
             }
+
+            .main table,.main th,.main tr,.main td{
+              line-height: 2.9 !important;
+            }
+
             .maintable td:nth-child(n){
               width: 30px;
             }
@@ -349,6 +388,25 @@
                         </td>
                         <td>&nbsp;</td>
                       </tr>
+                      <tr style="border: 4px solid;">
+                        <td>মূল টাকা প্রদানের তারিখ</td>
+                        <td><span><?php echo date('d/m/Y', strtotime("$comission_date_3"));?></span></td>
+                        <td><span class="grand_total"><?php echo $total;?>&nbsp;</span>টাকা</td>
+                        <td><?php  echo $payment_method; ?></td>
+                        <td>
+                          <?php 
+
+                            if($capital_payment_description==1){
+                              echo "PAID";
+                            }
+                            else{
+                              echo "&nbsp;";
+                            }
+
+                          ?>
+                        </td>
+                        <td>&nbsp;</td>
+                      </tr>
 
                     </tbody>
                   </table>
@@ -356,4 +414,4 @@
 
               </div>
       </div>
-      <div class="pagebreak"></div>
+      

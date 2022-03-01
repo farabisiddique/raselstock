@@ -17,7 +17,7 @@ if(isset($_COOKIE["email"]))
 {
 
   include realpath('../db.php');
-  $upcoming_days = 15;
+  $upcoming_days = 50;
   $add_day_to_today = $upcoming_days - 1;
   
   $today = date('Y-m-d');

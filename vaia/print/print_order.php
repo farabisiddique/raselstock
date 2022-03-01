@@ -57,6 +57,8 @@ function find_second_reference($db_con,$code){
               $delivery_date = $row['delivery_date'];
               $payment_method = $row['payment_method'];
               $payment_description = $row['payment_description'];
+              $capital_payment_description = $row['capital_payment_description'];
+              $second_referral_payment = $row['second_referral_payment'];
               $order_status = $row['order_status'];
               $total = $row['total'];
               $invoice_no = $row['my_referral_code'];
@@ -66,6 +68,7 @@ function find_second_reference($db_con,$code){
               $comission_date_3 = $row['comission_date_3'];
               $comission_percentage = $row['comission_percentage'];
               $referral_percentage = $row['referral_percentage'];
+              $second_referral_percentage = $row['second_referral_percentage'];
               $stock_comission = $row['comission_amount'];
               $pay_prefix = $payment_description[0];
               $pay_suffix = $payment_description[1];
@@ -108,6 +111,7 @@ function find_second_reference($db_con,$code){
       }
 
       if($sr){
+        $second_ref_comission = floor(($total*$second_referral_percentage)/100);
         require('second_reference_print.php');
       }
 
