@@ -12,6 +12,34 @@ function ordinal($number) {
         return $number. $ends[$number % 10];
 }
 
+function find_second_reference($db_con,$code){
+
+    $sql2 = "SELECT * FROM order_table WHERE my_referral_code='$code'";
+         
+    $result2 = $db_con->query($sql2);
+
+    if($result2->num_rows>0){
+      while ($row = $result2->fetch_assoc()) {
+          if(!is_null($row['reference_name']) && !is_null($row['reference_phone']) ){
+
+        $scnd_rfr_name = $row['reference_name'];
+        $scnd_rfr_phone = $row['reference_phone'];
+        $second_reference = array($scnd_rfr_name,$scnd_rfr_phone);
+      }
+      else{
+          $second_reference = false;
+        }
+      }
+    }
+    else{
+      $second_reference = false;
+    }
+
+    return $second_reference;
+
+
+}
+
 
 if(isset($_COOKIE["email"]))
 {
@@ -35,7 +63,7 @@ if(isset($_COOKIE["email"]))
 
   $all_dates_array = array();
   
-  $sql2 = "SELECT * FROM order_table WHERE NOT(payment_description='33') AND order_status=2";
+  $sql2 = "SELECT * FROM order_table WHERE (NOT(payment_description='33') OR NOT(second_referral_payment=3)) AND order_status=2";
 
   $result2 = $conn->query($sql2);
 
@@ -45,6 +73,7 @@ if(isset($_COOKIE["email"]))
       $no_upcoming_payment = 0;
       $main_array = array();
       $ref_array = array();
+      $scnd_ref_array = array();
   
       while($row = $result2->fetch_assoc()) {
  
@@ -74,6 +103,8 @@ if(isset($_COOKIE["email"]))
 
             $pay_suffix = $row['payment_description'][1];
             $pay_suffix = (int) $pay_suffix;
+            $sr_status = $row['second_referral_payment'];
+            $references_code = $row['references_code'];
 
             if($pay_suffix==3){
 
@@ -92,6 +123,33 @@ if(isset($_COOKIE["email"]))
                   $ref_array[$sort_date_ref][0] = $row;
                   
                 }
+
+            }
+            if($sr_status==3){
+
+            }
+            else{
+
+                $sr = find_second_reference($conn,$references_code);
+
+                if($sr){
+                  $row['second_reference_name'] = $sr[0];
+                  $row['second_reference_phone'] = $sr[1];
+                  $second_referral_percentage = $row['second_referral_percentage'];
+                  $row['scnd_ref_comission_no'] = $sr_status+1;
+                  $date_row_string_ref_scnd = "comission_date_".$row['scnd_ref_comission_no'];
+                  $sort_date_ref_scnd = $row[$date_row_string_ref_scnd];
+
+                  if (array_key_exists($sort_date_ref_scnd,$scnd_ref_array)){
+                    array_push($scnd_ref_array[$sort_date_ref_scnd],$row);
+                    
+                  }
+                  else{
+                    $scnd_ref_array[$sort_date_ref_scnd][0] = $row;
+                    
+                  }
+                }
+                  
 
             }
 
@@ -167,7 +225,7 @@ if(isset($_COOKIE["email"]))
 
   <?php    
     require(realpath('./preloader.php'));
-?>
+  ?>
 
   <?php 
     require(realpath('./navbar.php'));
@@ -250,7 +308,7 @@ if(isset($_COOKIE["email"]))
 
                                         <li class="nav-item mb-3">
                                           
-                                          <button type="button" class="btn btn-outline-primary btn-block paycomission" data-toggle="modal" data-target="#modal-warning" data-name="<?php echo $bvalue['customer_name'];?>" data-id="<?php echo $bvalue['id'];?>" data-pd="<?php echo $bvalue['comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($bvalue['comission_no']);?> Stock Comission (<?php echo $bvalue['comission_amount'];?> Taka)</button>
+                                          <button type="button" class="btn btn-outline-primary btn-block paycomission" data-toggle="modal" data-target="#modal-warning" data-name="<?php echo $bvalue['customer_name'];?>" data-id="<?php echo $bvalue['id'];?>" data-pd="<?php echo $bvalue['comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($bvalue['comission_no']);?>  Comission (<?php echo $bvalue['comission_amount'];?> Taka)</button>
 
                                         
 
@@ -269,7 +327,7 @@ if(isset($_COOKIE["email"]))
                                 <div class="col-md-4">
                                   <div class="card card-widget widget-user-2">   
                                     <div class="widget-user-header bg-dark">
-                                      <h5>Reference Information</h5> 
+                                      <h5>Main Reference Information</h5> 
                                     </div>
                                     <div class="card-footer p-0">
                                       <ul class="nav flex-column">
@@ -295,7 +353,57 @@ if(isset($_COOKIE["email"]))
                                         </li>
                                         
                                          <li class="nav-item mb-3">
-                                          <button type="button" class="btn btn-outline-primary btn-block payreferral" data-toggle="modal" data-target="#modal-secondary" data-name="<?php echo $cvalue['reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['ref_comission_no']);?> Reference Comission (<?php echo floor(($cvalue['total']*$cvalue['referral_percentage'])/100); ?> Taka)</button>
+                                          <button type="button" class="btn btn-outline-dark btn-block payreferral" data-toggle="modal" data-target="#modal-secondary" data-name="<?php echo $cvalue['reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['ref_comission_no']);?>  Comission (<?php echo floor(($cvalue['total']*$cvalue['referral_percentage'])/100); ?> Taka)</button>
+                                        </li>
+                                      
+                                      </ul>
+                                    </div>
+
+                                      
+                                  </div>
+                                  
+                                </div>
+                                <?php  } ?>
+
+
+                                <?php   
+                                foreach ($scnd_ref_array[$a_date] as $key => $cvalue) { 
+                                  ?>
+                                <div class="col-md-4">
+                                  <div class="card card-widget widget-user-2">   
+                                    <div class="widget-user-header bg-danger">
+                                      <h5>Second Reference Information</h5> 
+                                    </div>
+                                    <div class="card-footer p-0">
+                                      <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                          <a href="#" class="nav-link">
+                                             Customer Name: <span class="float-right badge bg-info"><?php echo $cvalue['customer_name'];?></span>
+                                          </a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a href="#" class="nav-link">
+                                             Main Reference Name: <span class="float-right badge bg-info"><?php echo $cvalue['reference_name'];?></span>
+                                          </a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a href="#" class="nav-link">
+                                            Second Reference: <span class="float-right badge bg-info"><?php echo $cvalue['second_reference_name'];?></span>
+                                          </a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a href="" class="nav-link">
+                                            Second Reference Contact No: <span class="float-right badge bg-primary"><?php echo $cvalue['second_reference_phone'];?></span>
+                                          </a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a href="#" class="nav-link">
+                                             Comission Amount: <span class="float-right badge bg-primary"><?php echo floor(($cvalue['total']*$cvalue['second_referral_percentage'])/100); ?> Taka</span>
+                                          </a>
+                                        </li>
+                                        
+                                         <li class="nav-item mb-3">
+                                          <button type="button" class="btn btn-outline-danger btn-block payreferral" data-toggle="modal" data-target="#modal-secondary" data-name="<?php echo $cvalue['second_reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['scnd_ref_comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['scnd_ref_comission_no']);?>  Comission (<?php echo floor(($cvalue['total']*$cvalue['second_referral_percentage'])/100); ?> Taka)</button>
                                         </li>
                                       
                                       </ul>
