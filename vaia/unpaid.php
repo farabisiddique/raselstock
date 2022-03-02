@@ -102,6 +102,8 @@ if(isset($_COOKIE["email"]))
 
             $pay_suffix = $row['payment_description'][1];
             $pay_suffix = (int) $pay_suffix;
+            $sr_status = $row['second_referral_payment'];
+            $references_code = $row['references_code'];
 
             if($pay_suffix==3){
 
@@ -123,31 +125,61 @@ if(isset($_COOKIE["email"]))
 
             }
 
+            if($sr_status==3){
+
+            }
+            else{
+
+                $sr = find_second_reference($conn,$references_code);
+
+                if($sr){
+
+                  $row['second_reference_name'] = $sr[0];
+                  $row['second_reference_phone'] = $sr[1];
+                  $second_referral_percentage = $row['second_referral_percentage'];
+                  $row['scnd_ref_comission_no'] = $sr_status+1;
+                  $date_row_string_ref_scnd = "comission_date_".$row['scnd_ref_comission_no'];
+                  $sort_date_ref_scnd = $row[$date_row_string_ref_scnd];
+
+                  if (array_key_exists($sort_date_ref_scnd,$scnd_ref_array)){
+                    array_push($scnd_ref_array[$sort_date_ref_scnd],$row);
+                    
+                  }
+                  else{
+                    $scnd_ref_array[$sort_date_ref_scnd][0] = $row;
+                    
+                  }
+                }
+                  
+
+            }
+
           }
               
           
       }
-  
+
+
+      $all_stock_com_dates = array_keys($main_array);
+      $all_ref_com_dates = array_keys($ref_array);
+      $all_scnd_ref_com_dates = array_keys($scnd_ref_array);
+      $merged_array = array_merge($all_stock_com_dates,$all_ref_com_dates,$all_scnd_ref_com_dates);
+      $unique_array = array_unique($merged_array);
+
+      $period_array = array();
+      foreach ($period as $key => $value) {
+        array_push($period_array,$value->format('Y-m-d'));
+      }
+      $period = array_intersect($period_array, $unique_array);
+      usort($period, "date_sort");
+      $upcoming_payment = count($period);
 
   }
   else{
       $no_upcoming_payment = 1;
   }
 
-$all_stock_com_dates = array_keys($main_array);
-$all_ref_com_dates = array_keys($ref_array);
-$merged_array = array_merge($all_stock_com_dates,$all_ref_com_dates);
-$unique_array = array_unique($merged_array);
-
-$period_array = array();
-foreach ($period as $key => $value) {
-  array_push($period_array,$value->format('Y-m-d'));
-}
-
-$period = array_intersect($period_array, $unique_array);
-usort($period, "date_sort");
-
-$upcoming_payment = count($period);
+      
 
 
 
@@ -180,8 +212,6 @@ $upcoming_payment = count($period);
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
 
   <link rel="stylesheet" type="text/css" href="plugins/progress-bar-number/progressnumber.css">
 
@@ -276,7 +306,7 @@ $upcoming_payment = count($period);
 
                                         <li class="nav-item mb-3">
                                           
-                                          <button type="button" class="btn btn-outline-primary btn-block paycomission" data-toggle="modal" data-target="#modal-warning" data-name="<?php echo $bvalue['customer_name'];?>" data-id="<?php echo $bvalue['id'];?>" data-pd="<?php echo $bvalue['comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($bvalue['comission_no']);?> Stock Comission (<?php echo $bvalue['comission_amount'];?> Taka)</button>
+                                          <button type="button" class="btn btn-outline-primary btn-block paycomission" data-toggle="modal" data-target="#modal-warning" data-name="<?php echo $bvalue['customer_name'];?>" data-id="<?php echo $bvalue['id'];?>" data-pd="<?php echo $bvalue['comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($bvalue['comission_no']);?>  Comission (<?php echo $bvalue['comission_amount'];?> Taka)</button>
 
                                         
 
@@ -295,7 +325,7 @@ $upcoming_payment = count($period);
                                 <div class="col-md-4">
                                   <div class="card card-widget widget-user-2">   
                                     <div class="widget-user-header bg-dark">
-                                      <h5>Reference Information</h5> 
+                                      <h5>Main Reference Information</h5> 
                                     </div>
                                     <div class="card-footer p-0">
                                       <ul class="nav flex-column">
@@ -321,7 +351,57 @@ $upcoming_payment = count($period);
                                         </li>
                                         
                                          <li class="nav-item mb-3">
-                                          <button type="button" class="btn btn-outline-primary btn-block payreferral" data-toggle="modal" data-target="#modal-secondary" data-name="<?php echo $cvalue['reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['ref_comission_no']);?> Reference Comission (<?php echo floor(($cvalue['total']*$cvalue['referral_percentage'])/100); ?> Taka)</button>
+                                          <button type="button" class="btn btn-outline-dark btn-block payreferral" data-toggle="modal" data-target="#modal-secondary" data-name="<?php echo $cvalue['reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['ref_comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['ref_comission_no']);?>  Comission (<?php echo floor(($cvalue['total']*$cvalue['referral_percentage'])/100); ?> Taka)</button>
+                                        </li>
+                                      
+                                      </ul>
+                                    </div>
+
+                                      
+                                  </div>
+                                  
+                                </div>
+                                <?php  } ?>
+
+
+                                <?php   
+                                foreach ($scnd_ref_array[$a_date] as $key => $cvalue) { 
+                                  ?>
+                                <div class="col-md-4">
+                                  <div class="card card-widget widget-user-2">   
+                                    <div class="widget-user-header bg-danger">
+                                      <h5>Second Reference Information</h5> 
+                                    </div>
+                                    <div class="card-footer p-0">
+                                      <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                          <a href="#" class="nav-link">
+                                             Customer Name: <span class="float-right badge bg-info"><?php echo $cvalue['customer_name'];?></span>
+                                          </a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a href="#" class="nav-link">
+                                             Main Reference Name: <span class="float-right badge bg-info"><?php echo $cvalue['reference_name'];?></span>
+                                          </a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a href="#" class="nav-link">
+                                            Second Reference: <span class="float-right badge bg-info"><?php echo $cvalue['second_reference_name'];?></span>
+                                          </a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a href="" class="nav-link">
+                                            Second Reference Contact No: <span class="float-right badge bg-primary"><?php echo $cvalue['second_reference_phone'];?></span>
+                                          </a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a href="#" class="nav-link">
+                                             Comission Amount: <span class="float-right badge bg-primary"><?php echo floor(($cvalue['total']*$cvalue['second_referral_percentage'])/100); ?> Taka</span>
+                                          </a>
+                                        </li>
+                                        
+                                         <li class="nav-item mb-3">
+                                          <button type="button" class="btn btn-outline-danger btn-block paysecondreferral" data-toggle="modal" data-target="#modal-danger" data-name="<?php echo $cvalue['second_reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['scnd_ref_comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['scnd_ref_comission_no']);?>  Comission (<?php echo floor(($cvalue['total']*$cvalue['second_referral_percentage'])/100); ?> Taka)</button>
                                         </li>
                                       
                                       </ul>
@@ -401,6 +481,28 @@ $upcoming_payment = count($period);
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-outline-dark" data-dismiss="modal">No</button>
               <button type="button" class="btn btn-outline-dark" id="yespay_ref" data-orderid="" data-pd="" onclick="$('#modal-secondary').modal('hide');" aria-label="Close">Yes</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+  </div>
+
+  <div class="modal fade" id="modal-danger" style="display: none; padding-right: 12px;" aria-modal="true" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content bg-danger">
+            <div class="modal-header">
+              <h4 class="modal-title">Second Referral Comission Payment Confirmation</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Have you just paid <span id="second_reference_name_modal"></span>?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-dark" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-outline-dark" id="yespay_second_ref" data-orderid="" data-pd="" onclick="$('#modal-danger').modal('hide');" aria-label="Close">Yes</button>
             </div>
           </div>
           <!-- /.modal-content -->

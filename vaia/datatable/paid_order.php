@@ -1,26 +1,9 @@
 <?php
 
-/*
- * DataTables example server-side processing script.
- *
- * Please note that this script is intentionally extremely simple to show how
- * server-side processing can be implemented, and probably shouldn't be used as
- * the basis for a large complex system. It is suitable for simple use cases as
- * for learning.
- *
- * See http://datatables.net/usage/server-side for full details on the server-
- * side processing requirements of DataTables.
- *
- * @license MIT - http://datatables.net/license_mit
- */
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Easy set variables
- */
-
-// $x = include '/media/farabi/MY ESSENTIALS/Projects/Rasel Enterprise/AdminLTE-3.2.0-rc/env.php'; 
 
 $path = realpath('./../../env.php');
+$scnd_ref_path = realpath('./find_scnd_ref.php');
+include $scnd_ref_path;
 
 include  $path; 
 
@@ -67,48 +50,87 @@ $columns = array(
 		   		}
 			} 
 	),
+	array( 'db' => 'references_code',     
+		   'dt' => 6,
+		   'formatter' => function( $d, $row ) {
+
+		   		$sr = find_second_reference($d);
+
+		   		if($sr){
+		   			$sr_name = $sr[0];
+		   			return $sr_name;
+		   		}
+		   		else{
+		   			return null;
+		   		}
+		   	return $d;
+		   		
+
+			} 
+
+	),
+	array( 'db' => 'references_code',     
+		   'dt' => 7,
+		   'formatter' => function( $d, $row ) {
+
+		   		$sr = find_second_reference($d);
+
+		   		if($sr){
+		   			$sr_phone = $sr[1];
+		   			
+		   			return "+880".$sr_phone;
+		   		}
+		   		else{
+		   			return null;
+		   		}
+		   	return $d;
+		   		
+
+			} 
+
+	),
 	array(
 		'db'        => 'order_date',
-		'dt'        => 6,
+		'dt'        => 8,
 		'formatter' => function( $d, $row ) {
 			return date( 'l, jS M, y', strtotime($d));
 		}
 	),
-	array( 'db' => 'product_name',     'dt' => 7 ),
-	array( 'db' => 'stock_amount',     'dt' => 8 ),
-	array( 'db' => 'product_amount',     'dt' => 9 ),
+	array( 'db' => 'product_name',     'dt' => 9 ),
+	array( 'db' => 'stock_amount',     'dt' => 10 ),
+	array( 'db' => 'product_amount',     'dt' => 11 ),
 	array(
 		'db'        => 'total',
-		'dt'        => 10,
+		'dt'        => 12,
 		'formatter' => function( $d, $row ) {
 			return '৳ '.number_format($d);
 		}
 	),
 	array(
 		'db'        => 'comission_date_1',
-		'dt'        => 11,
+		'dt'        => 13,
 		'formatter' => function( $d, $row ) {
 			return date( 'l, jS M, y', strtotime($d));
 		}
 	),
 	array(
 		'db'        => 'comission_date_2',
-		'dt'        => 12,
+		'dt'        => 14,
 		'formatter' => function( $d, $row ) {
 			return date( 'l, jS M, y', strtotime($d));
 		}
 	),
 	array(
 		'db'        => 'comission_date_3',
-		'dt'        => 13,
+		'dt'        => 15,
 		'formatter' => function( $d, $row ) {
 			return date( 'l, jS M, y', strtotime($d));
 		}
 	),
-	array( 'db' => 'comission_amount',     'dt' => 14 ),
+	array( 'db' => 'comission_amount',     'dt' => 16 ),
 	array(
 		'db'        => 'payment_description',
-		'dt'        => 15,
+		'dt'        => 17,
 		'formatter' => function( $d, $row ) {
 			$pay_preffix = $d[0];
 			$pay_suffix = $d[1];
@@ -147,7 +169,7 @@ $columns = array(
 		}
 	),
 	array( 'db' => 'id',     
-		   'dt' => 16,
+		   'dt' => 18,
 		   'formatter' => function( $d, $row ) {
 
 		   		$printInvoiceButton = "<button type='button' class='btn btn-block btn-primary btn-xs'><a href='print/print_order.php?id=".$d."' class='text-white'>Print Order</a></button>";

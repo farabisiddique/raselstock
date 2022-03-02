@@ -1,26 +1,10 @@
 <?php
 
-/*
- * DataTables example server-side processing script.
- *
- * Please note that this script is intentionally extremely simple to show how
- * server-side processing can be implemented, and probably shouldn't be used as
- * the basis for a large complex system. It is suitable for simple use cases as
- * for learning.
- *
- * See http://datatables.net/usage/server-side for full details on the server-
- * side processing requirements of DataTables.
- *
- * @license MIT - http://datatables.net/license_mit
- */
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Easy set variables
- */
-
-// $x = include '/media/farabi/MY ESSENTIALS/Projects/Rasel Enterprise/AdminLTE-3.2.0-rc/env.php'; 
 
 $path = realpath('./../../env.php');
+
+$scnd_ref_path = realpath('./find_scnd_ref.php');
+include $scnd_ref_path;
 
 include  $path; 
 
@@ -80,66 +64,105 @@ $columns = array(
 		   		}
 			} 
 	),
+	array( 'db' => 'references_code',     
+		   'dt' => 7,
+		   'formatter' => function( $d, $row ) {
+
+		   		$sr = find_second_reference($d);
+
+		   		if($sr){
+		   			$sr_name = $sr[0];
+		   			return $sr_name;
+		   		}
+		   		else{
+		   			return null;
+		   		}
+		   	return $d;
+		   		
+
+			} 
+
+	),
+	array( 'db' => 'references_code',     
+		   'dt' => 8,
+		   'formatter' => function( $d, $row ) {
+
+		   		$sr = find_second_reference($d);
+
+		   		if($sr){
+		   			$sr_phone = $sr[1];
+		   			
+		   			return "+880".$sr_phone;
+		   		}
+		   		else{
+		   			return null;
+		   		}
+		   	return $d;
+		   		
+
+			} 
+
+	),
 	array(
 		'db'        => 'order_date',
-		'dt'        => 7,
+		'dt'        => 9,
 		'formatter' => function( $d, $row ) {
 			return date( 'l, jS M, y', strtotime($d));
 		}
 	),
-	array( 'db' => 'product_name',     'dt' => 8 ),
-	array( 'db' => 'stock_amount',     'dt' => 9 ),
-	array( 'db' => 'product_amount',     'dt' => 10 ),
+	array( 'db' => 'product_name',     'dt' => 10 ),
+	array( 'db' => 'stock_amount',     'dt' => 11 ),
+	array( 'db' => 'product_amount',     'dt' => 12 ),
 	array(
 		'db'        => 'total',
-		'dt'        => 11,
+		'dt'        => 13,
 		'formatter' => function( $d, $row ) {
 			return '৳ '.number_format($d);
 		}
 	),
 	array(
 		'db'        => 'comission_date_1',
-		'dt'        => 12,
+		'dt'        => 14,
 		'formatter' => function( $d, $row ) {
 			return date( 'l, jS M, y', strtotime($d));
 		}
 	),
 	array(
 		'db'        => 'comission_date_2',
-		'dt'        => 13,
+		'dt'        => 15,
 		'formatter' => function( $d, $row ) {
 			return date( 'l, jS M, y', strtotime($d));
 		}
 	),
 	array(
 		'db'        => 'comission_date_3',
-		'dt'        => 14,
+		'dt'        => 16,
 		'formatter' => function( $d, $row ) {
 			return date( 'l, jS M, y', strtotime($d));
 		}
 	),
-	array( 'db' => 'comission_amount',     'dt' => 15 ),
+	array( 'db' => 'comission_amount',     'dt' => 17 ),
 	array(
 		'db'        => 'payment_method',
-		'dt'        => 16,
+		'dt'        => 18,
 		'formatter' => function( $d, $row ) {
 			if($d==0){
-				return "Bkash";
+				return "Cash";
 			}
 			else{
-				return "Cash";
+				return "Bkash";
 			}
 		}
 	),
 	array(
 		'db'        => 'delivery_date',
-		'dt'        => 17,
+		'dt'        => 19,
 		'formatter' => function( $d, $row ) {
 			return date( 'l, jS M, y', strtotime($d));
 		}
 	),
 	array( 'db' => 'order_status',     
-		   'dt' => 18,
+		   'dt' => 20,
 		   'formatter' => function( $d, $row ) { 
 
 		   		if($d==0){
@@ -167,7 +190,7 @@ $columns = array(
 
 	),
 	array( 'db' => 'id',     
-		   'dt' => 19,
+		   'dt' => 21,
 		   'formatter' => function( $d, $row ) {
 
 		   		$completeButton = "<button type='button' class='btn btn-block btn-success btn-xs'><a href='confirm_order.php?id=".$d."' class='text-white'>Confirm Order</a></button>";
@@ -183,13 +206,6 @@ $columns = array(
 
 );
 
-// SQL server connection information
-// $sql_details = array(
-// 	'user' => 'farabi',
-// 	'pass' => 'test',
-// 	'db'   => 'rasele_db',
-// 	'host' => 'localhost'
-// );
 
 $sql_details = array(
 	'user' => DB_USER,

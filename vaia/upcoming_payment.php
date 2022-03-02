@@ -45,7 +45,7 @@ if(isset($_COOKIE["email"]))
 {
 
   include realpath('../db.php');
-  $upcoming_days = 50;
+  $upcoming_days = 55;
   $add_day_to_today = $upcoming_days - 1;
   
   $today = date('Y-m-d');
@@ -133,6 +133,7 @@ if(isset($_COOKIE["email"]))
                 $sr = find_second_reference($conn,$references_code);
 
                 if($sr){
+
                   $row['second_reference_name'] = $sr[0];
                   $row['second_reference_phone'] = $sr[1];
                   $second_referral_percentage = $row['second_referral_percentage'];
@@ -157,10 +158,12 @@ if(isset($_COOKIE["email"]))
               
           
       }
+        
 
         $all_stock_com_dates = array_keys($main_array);
         $all_ref_com_dates = array_keys($ref_array);
-        $merged_array = array_merge($all_stock_com_dates,$all_ref_com_dates);
+        $all_scnd_ref_com_dates = array_keys($scnd_ref_array);
+        $merged_array = array_merge($all_stock_com_dates,$all_ref_com_dates,$all_scnd_ref_com_dates);
         $unique_array = array_unique($merged_array);
 
         $period_array = array();
@@ -353,7 +356,7 @@ if(isset($_COOKIE["email"]))
                                         </li>
                                         
                                          <li class="nav-item mb-3">
-                                          <button type="button" class="btn btn-outline-dark btn-block payreferral" data-toggle="modal" data-target="#modal-secondary" data-name="<?php echo $cvalue['reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['ref_comission_no']);?>  Comission (<?php echo floor(($cvalue['total']*$cvalue['referral_percentage'])/100); ?> Taka)</button>
+                                          <button type="button" class="btn btn-outline-dark btn-block payreferral" data-toggle="modal" data-target="#modal-secondary" data-name="<?php echo $cvalue['reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['ref_comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['ref_comission_no']);?>  Comission (<?php echo floor(($cvalue['total']*$cvalue['referral_percentage'])/100); ?> Taka)</button>
                                         </li>
                                       
                                       </ul>

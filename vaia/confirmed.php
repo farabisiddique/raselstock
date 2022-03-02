@@ -278,6 +278,8 @@ if(isset($_COOKIE["email"]))
                         <th>Customer Address</th>
                         <th>Reference Name</th>
                         <th>Reference Phone</th>
+                        <th>2nd Reference Name</th>
+                        <th>2nd Reference Phone</th> 
                         <th>Order Date</th>
                         <th>Product Name</th>
                         <th>Stock</th>
