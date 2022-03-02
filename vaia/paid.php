@@ -440,6 +440,7 @@ if(isset($_COOKIE["email"]))
                         <th>3rd Comission Date</th>
                         <th>Comission Amount</th>
                         <th>Payment Description</th>
+                        <th>Capital and 2nd Referral Status</th>
                         <th>Action</th>
 
                     </tr>

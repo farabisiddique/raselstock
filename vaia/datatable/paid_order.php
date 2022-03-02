@@ -3,6 +3,10 @@
 
 $path = realpath('./../../env.php');
 $scnd_ref_path = realpath('./find_scnd_ref.php');
+
+$capital_scnd_ref_paid_finder_path = realpath('./capital_scnd_ref_paid_finder.php');
+
+include $capital_scnd_ref_paid_finder_path;
 include $scnd_ref_path;
 
 include  $path; 
@@ -168,8 +172,41 @@ $columns = array(
 			return $comission_stat."<br>".$ref_stat;
 		}
 	),
+	array(
+		'db'        => 'id',
+		'dt'        => 18,
+		'formatter' => function( $d, $row ) {
+			$cs = capital_scnd_ref_paid_finder($d);
+			$capital_status = $cs[0];
+			$scnd_ref_status = $cs[1];
+
+			if($capital_status==1){
+				$capital_stat = "<p class='ref_stat1'>Capital Paid</p><br>";
+			}
+			else{
+				$capital_stat = "";
+			}
+
+			switch ($scnd_ref_status) {
+				case 1:
+					$scnd_ref_stat = "<p class='ref_stat1'>1st Second Reference Comission Paid</p>";
+					break;
+				case 2:
+					$scnd_ref_stat = "<p class='ref_stat2'>1st and 2nd Second Reference Comission Paid</p>";
+					break;
+				case 3:
+					$scnd_ref_stat = "<p class='ref_stat3'>All Second Reference Comission Paid</p>";
+					break;
+				default:
+					$scnd_ref_stat = "";
+					break;
+			}
+
+			return $capital_stat.$scnd_ref_stat;
+		}
+	),
 	array( 'db' => 'id',     
-		   'dt' => 18,
+		   'dt' => 19,
 		   'formatter' => function( $d, $row ) {
 
 		   		$printInvoiceButton = "<button type='button' class='btn btn-block btn-primary btn-xs'><a href='print/print_order.php?id=".$d."' class='text-white'>Print Order</a></button>";
