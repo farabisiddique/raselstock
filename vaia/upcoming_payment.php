@@ -403,7 +403,7 @@ if(isset($_COOKIE["email"]))
                                         </li>
                                         
                                          <li class="nav-item mb-3">
-                                          <button type="button" class="btn btn-outline-danger btn-block payreferral" data-toggle="modal" data-target="#modal-secondary" data-name="<?php echo $cvalue['second_reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['scnd_ref_comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['scnd_ref_comission_no']);?>  Comission (<?php echo floor(($cvalue['total']*$cvalue['second_referral_percentage'])/100); ?> Taka)</button>
+                                          <button type="button" class="btn btn-outline-danger btn-block paysecondreferral" data-toggle="modal" data-target="#modal-danger" data-name="<?php echo $cvalue['second_reference_name'];?>" data-id="<?php echo $cvalue['id'];?>" data-pd="<?php echo $cvalue['scnd_ref_comission_no'];?>"><i class="fas fa-money-bill-alt"></i> Pay the <?php echo ordinal($cvalue['scnd_ref_comission_no']);?>  Comission (<?php echo floor(($cvalue['total']*$cvalue['second_referral_percentage'])/100); ?> Taka)</button>
                                         </li>
                                       
                                       </ul>
@@ -489,6 +489,31 @@ if(isset($_COOKIE["email"]))
         </div>
         <!-- /.modal-dialog -->
   </div>
+
+  <div class="modal fade" id="modal-danger" style="display: none; padding-right: 12px;" aria-modal="true" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content bg-danger">
+            <div class="modal-header">
+              <h4 class="modal-title">Second Referral Comission Payment Confirmation</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Have you just paid <span id="second_reference_name_modal"></span>?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-dark" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-outline-dark" id="yespay_second_ref" data-orderid="" data-pd="" onclick="$('#modal-danger').modal('hide');" aria-label="Close">Yes</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+  </div>
+
+
+
 
   <?php    
     require(realpath('./footer.php'));
@@ -629,6 +654,54 @@ if(isset($_COOKIE["email"]))
                     url: "pay.php",
                     async:false,
                     data: {id: id,pd: pd,type:type},
+                    success: function(msg) {
+        
+                    if(msg==0){
+
+                      alert("Sorry! Payment Unsuccessfull");
+                      location.reload();
+                      
+                    }
+                    else{
+                      
+                      alert("Payment Successfull");
+                      location.reload();
+                      
+                    }
+
+                 }
+            });
+
+           
+
+  });
+
+
+  $(".paysecondreferral").on("click",function(){
+
+      var name = $(this).data("name");
+      var id = $(this).data("id");
+      var pd = $(this).data("pd");
+
+      $("#second_reference_name_modal").html(name);
+      $('#yespay_second_ref').attr('data-orderid', id);
+      $('#yespay_second_ref').attr('data-pd', pd);
+
+
+
+
+  });
+
+  $("#yespay_second_ref").click(function(){
+
+            var id = $(this).data("orderid");
+            var pd = $(this).data("pd");   
+            
+            $.ajax({
+                    method: "POST",
+                    url: "pay_scnd_ref.php",
+                    async:false,
+                    data: {id: id,pd: pd},
                     success: function(msg) {
         
                     if(msg==0){
