@@ -47,13 +47,14 @@
             .ref_main{
               width: 100%;
               height: 500px;
-              /*background-color: darkmagenta;*/
+              
 
             }
             .middle{
               width: 95%;
               height: 100%;
               margin: auto;
+              /*background-color: yellow;*/
 
             }
             .topname{
@@ -62,6 +63,7 @@
               text-align: center;
               margin-bottom: 0.5%;
               padding-top: 0.1%;
+
               
               
               
@@ -83,7 +85,7 @@
               margin-bottom: 0.5%;
               line-height: 0.8;
               padding-top: 0.1%;
-              /*background-color: yellow;*/
+              
             }
             .ref_topname h1{
               font-size: 30px;
@@ -110,7 +112,7 @@
             .holder_info{
               width: 100%;
               height: 18%;
-              /*background-color: yellowgreen;*/
+              
               
             }
 
@@ -133,9 +135,9 @@
             }
             .ref_holder_info{
               width: 100%;
-              height: 24%;
+              height: 26%;
               line-height: 0.7;
-              /*background-color: red;*/
+              /*background-color: yellowgreen;*/
               
             }
 
@@ -146,7 +148,7 @@
               /*background-color: pink;*/
             }
             .ref_holder_info_part1{
-              width: 48%;
+              width: 100%;
               height: 100%;
               float: left;
               text-align: right;
@@ -171,22 +173,23 @@
 
             .ref_first_table{
               width: 100%;
-              height: 13%;
+              height: 16%;
               text-align: center;
-
+              /*background-color: lightpink;*/
 
             }
             .second_table{
               width: 100%;
-              height: 18%;
+              height: 26%;
               text-align: center;
+              /*background-color: lightgray;*/
               
             }
             .ref_second_table{
               width: 100%;
-              height: 25%;
+              height: 26%;
               text-align: center;
-              /*background-color: magenta;*/
+              /*background-color: lightgray;*/
               
             }
 
@@ -235,7 +238,7 @@
               text-align: center;
             }
             .cut_line{
-              margin-top: 20px;
+              margin-top: 7%;
               text-align: center;
             }
 

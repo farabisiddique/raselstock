@@ -47,11 +47,7 @@
                       </span>
                     </h3>
               </div>
-              <div class="ref_holder_info_part2" style="line-height: 1.2;">
-                  
-                  
-                  
-              </div>
+              
             </div>
         </div>
         <div class="ref_first_table">
