@@ -328,8 +328,6 @@
           $(".product_amount").html(product_amount);
           $(".total").html(total_amount);
           $(".comission_amount").html(comission_amount);
-
-          // console.log($('.tables_row'));
           
           for(var i=0;i<number_of_day;i++){
 
