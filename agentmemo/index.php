@@ -121,8 +121,8 @@
   <div class="container">
     <div class="menu">
       
-      <button type="button" class="btn btn-outline-dark" ><a href="index.php">হোম</a></button>
-      <button type="button" class="btn btn-outline-dark"><a href="print.php">মেমো ডাউনলোড করুন </a> </button>
+      <!-- <button type="button" class="btn btn-outline-dark" ><a href="index.php">হোম</a></button>
+      <button type="button" class="btn btn-outline-dark"><a href="print.php">মেমো ডাউনলোড করুন </a> </button> -->
       
     </div>
 
@@ -165,8 +165,10 @@
       <label id="textdesign">এজেন্ট অফিস:</label>
 
       <select name="agent_office" id="field">
-        <option value="Aft">A</option>
-        <option value="bok">A</option>
+        <option value="আফতাব বিবির হাট">আফতাব বিবির হাট</option>
+        <option value="বক্তারমুন্সী">বক্তারমুন্সী</option>
+        <option value="একাডেমী">একাডেমী</option>
+        <option value="রানীরহাট">রানীরহাট</option>
       </select>
 
       <label id="textdesign">এজেন্ট সংখ্যা  :</label>
