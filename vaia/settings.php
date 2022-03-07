@@ -179,7 +179,7 @@ if(isset($_COOKIE["email"]))
                                 </div>
 
                                 <div class="form-group">
-                                  <label for="main_product_brand">Product Name</label>
+                                  <label for="main_product_brand">Brand Name</label>
                                   <input type="text" class="form-control" id="main_product_brand" name="main_product_brand" value="<?php echo $main_product_brand;?>">
                                 </div>
 

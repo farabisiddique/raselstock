@@ -1,0 +1,244 @@
+
+            @page {
+                margin: 0px;
+            }
+            @media print {
+              .pagebreak { page-break-before: always; } /* page-break-after works, as well */   
+            }
+            *{
+              font-family: 'Montserrat', sans-serif;
+              font-size: 11px;
+              font-weight: bold;
+              color: blue;
+              border-color: blue;
+              /*margin: 0px;*/
+              padding: 0px;
+            }
+           .raselbg{
+                background-image: url('raselbg.png');
+                background-position-x: center;
+                background-repeat: no-repeat;
+                background-position-y: 75%;
+                background-size: 900px 239px;
+                print-color-adjust: exact;
+                color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                z-index: 99;
+            }
+
+            .ref_raselbg{
+                background-image: url('raselbg.png');
+                background-position-x: center;
+                background-repeat: no-repeat;
+                background-position-y: 99%;
+                background-size: 95% 40%;
+                print-color-adjust: exact;
+                color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                z-index: 99;
+            }
+
+            .main{
+              width: 100%;
+              height: 800px;
+              /*background-color: pink;*/
+                        
+            }
+            .ref_main{
+              width: 100%;
+              height: 500px;
+              /*background-color: darkmagenta;*/
+
+            }
+            .middle{
+              width: 95%;
+              height: 100%;
+              margin: auto;
+
+            }
+            .topname{
+              width: 100%;
+              height: 20%;
+              text-align: center;
+              margin-bottom: 0.5%;
+              padding-top: 0.1%;
+              
+              
+              
+            }
+            .topname h1{
+              font-size: 30px;
+            }
+            .topname h2{
+              font-size: 18px;
+            }
+            .topname h3{
+              font-size: 15px;
+            }
+
+            .ref_topname{
+              width: 100%;
+              height: 36%;
+              text-align: center;
+              margin-bottom: 0.5%;
+              line-height: 0.8;
+              padding-top: 0.1%;
+              /*background-color: yellow;*/
+            }
+            .ref_topname h1{
+              font-size: 30px;
+            }
+            .ref_topname h2{
+              font-size: 18px;
+            }
+            .ref_topname h3{
+              font-size: 15px;
+            }
+            .narrow_height{
+              line-height: 0.7;
+            }
+            .memoname{
+              text-align: center;
+              border: 3px solid green;
+              border-radius: 35px;
+              padding: 0.5%;
+              font-weight: bold;
+              padding-left: 20px;
+              padding-right: 20px;
+              font-size: 20px;
+            }
+            .holder_info{
+              width: 100%;
+              height: 18%;
+              /*background-color: yellowgreen;*/
+              
+            }
+
+            .holder_info_part{
+              width: 50%;
+              height: 100%;
+              float: left;
+            }
+            .holder_info_part1{
+              width: 48%;
+              height: 100%;
+              float: left;
+              text-align: right;
+            }
+            .holder_info_part2{
+              width: 50%;
+              height: 100%;
+              float: left;
+              text-align: right;
+            }
+            .ref_holder_info{
+              width: 100%;
+              height: 24%;
+              line-height: 0.7;
+              /*background-color: red;*/
+              
+            }
+
+            .ref_holder_info_part{
+              width: 50%;
+              height: 100%;
+              float: left;
+              /*background-color: pink;*/
+            }
+            .ref_holder_info_part1{
+              width: 48%;
+              height: 100%;
+              float: left;
+              text-align: right;
+              /*background-color: magenta;*/
+            }
+            .ref_holder_info_part2{
+              width: 50%;
+              height: 100%;
+              float: left;
+              text-align: right;
+            }
+            .buy_date_h{
+              text-align: right;
+            }
+            .first_table{
+              width: 100%;
+              height: 15%;
+              text-align: center;
+              /*background-color: dimgrey;*/
+
+            }
+
+            .ref_first_table{
+              width: 100%;
+              height: 13%;
+              text-align: center;
+
+
+            }
+            .second_table{
+              width: 100%;
+              height: 18%;
+              text-align: center;
+              
+            }
+            .ref_second_table{
+              width: 100%;
+              height: 25%;
+              text-align: center;
+              /*background-color: magenta;*/
+              
+            }
+
+            table,th,tr,td{
+              border: 2px solid blue;
+              border-collapse: collapse;
+              text-align: center;
+              line-height: 1.4;
+            }
+            table{
+              width: 100%;
+            }
+
+            .main table,.main th,.main tr,.main td{
+              line-height: 2.9 !important;
+            }
+
+            .maintable td:nth-child(n){
+              width: 30px;
+            }
+            .maintable td:nth-child(2n){
+              width: 70px;
+            }
+            .maintable td:nth-child(3n){
+              width: 70px;
+            }
+            .maintable td:nth-child(6n){
+              width: 100px;
+            }
+            .maintable td:nth-child(7n){
+              width: 100px;
+            }
+
+            .ref_first_table td:nth-child(n){
+              width: 20px;
+            }
+
+            .ref_first_table td:nth-child(4n){
+              width: 60px;
+            }
+            span{
+              font-weight: bolder;
+              color: blue;
+            }
+            .disclaimer{
+              text-align: center;
+            }
+            .cut_line{
+              margin-top: 20px;
+              text-align: center;
+            }
+
+            .pagebreak{
+              margin-bottom: 10px;
+            }
