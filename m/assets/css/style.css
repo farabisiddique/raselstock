@@ -1,0 +1,123 @@
+*{
+	margin: 20px;
+	padding: 0px;
+}
+
+.brand{
+	text-align: center;
+}
+
+.menu {
+	text-align: center;
+
+}
+
+.menu button{
+text-decoration: none;
+font-weight: bold;
+
+}
+
+.menu button a {
+	color:darkorange;
+	text-decoration: none;
+}
+
+
+
+.order{
+	font-weight: bold;
+	font-size: 22px;
+	color: blue;
+	text-align: center;
+	padding-top: 2%
+}
+
+
+.customer-form-box{
+
+ width:70%; 
+height:auto; 
+margin-left:16%; 
+float:left;
+background-color: #DFE0E4;
+border-radius: 12px;
+
+box-shadow: 8px 8px 8px #CFF4FC;
+}
+
+
+#textdesign {
+	float: left;
+
+	font-weight: bold;
+	font-size: 18px;
+	color: black;
+}
+
+form {
+
+	text-align: center;
+
+}
+
+#field{ 
+ width:95%; 
+ height:2%;
+ border-radius:8px; 
+ font-size:16px; 
+ padding: 2%;
+ font-weight: bold;
+  }
+
+
+#tablesize {
+    width: 71%;
+    margin-left: 14%
+}
+
+#totaltaka:after{
+	content: " টাকা";
+}
+
+
+#submit{ 
+	float: right;
+	text-align: center;
+ 
+padding: 10px 20px;
+margin-top:5%;
+font-weight: bold;
+color: darkorange;
+border-radius: 5px;
+ }
+
+ #bold {
+ 	border-top:4px dotted black;
+ 	font-weight: bold;
+ }
+
+ #submit:hover {
+ 	background-color:#343A40;
+ }
+
+
+#print{
+
+margin-left: 25%;
+
+}
+
+ #print button{
+ 	color: darkorange;
+ 	font-weight: bold;
+ }
+
+
+ .footer{
+ 	 font-weight: bold;
+ 	text-align: center;
+ 	margin-top: 15%;
+ 	
+ }
+
