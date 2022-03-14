@@ -63,6 +63,7 @@ if(isset($_POST["login"]))
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
     <link rel="stylesheet" href="rasellogin/rasellogin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Rasel Enterprise || Admin Login</title>
@@ -84,7 +85,7 @@ if(isset($_POST["login"]))
                         <?php echo $message; ?>
 
                         <p class="formBorder"><b>Email</b><br> <input type="email" name="email" required="1" id="email"></p>
-                        <p class="formBorder"><b>Passworld</b> <br> <input type="password" name="pass" required="1" id=""></p>
+                        <p class="formBorder"><b>Password</b> <br> <input type="password" name="pass" required="1" id=""></p>
 
                         <button type="submit" name="login" class="btn btn-success mb-1"><b>Login Now</b></button>
                     </form>
