@@ -398,7 +398,7 @@ if(isset($_COOKIE["email"]))
 <div class="wrapper">
 
   <?php    
-    require(realpath('./preloader.php'));
+    // require(realpath('./preloader.php'));
 ?>
 
   <?php 
